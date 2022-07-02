@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>EmoViz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{url_for('static',filename='display.css')}}" />
+    <link rel="icon" href="{{url_for('static',filename='eye.png')}}" type="image/png" />
+
+    <script>
+        function check() {
+            var p = document.getElementById("empf");
+            if (p.files.length == 0) {
+                alert("Please upload image");
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
+    <style>
+        .card {
+            position: relative;
+            height: 35em;
+            width: 40%;
+        }
+        
+        body {
+            background-image: url("/static/Picuploadb.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100%;
+        }
+        
+        h1 {
+            text-align: center;
+            color: white;
+        }
+        
+        @media screen and (max-width: 650px) {
+            .card {
+                position: fixed;
+                top: 20rem;
+                left: 7rem;
+                height: 20rem;
+                width: 10rem;
+                align-items: center;
+            }
+            body {
+                background-image: url("/static/Picuploadb.jpg");
+                background-repeat: no-repeat;
+                background-size: cover;
+                min-height: 100vh;
+            }
+            h1 {
+                position: fixed;
+                color: white;
+                top: 5rem;
+                left: 5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="righttopcontainer">
+        <a href="{{url_for('home')}}"><button class="glow-on-hover">HOME</button></a
+      >
+    </div>
+    <h1>UPLOAD A PIC</h1>
+    <div class="card">
+      <form
+        action="/detectpic"
+        method="post"
+        enctype="multipart/form-data"
+        onsubmit="return check();"
+      >
+        <input
+          class="glow-on-hover"
+          id="empf"
+          type="file"
+          name="file"
+          accept="image/*"
+        />
+        <br />
+        <br />
+        <!-- <input class="glow-on-hover" type="submit" value="Submit" /> -->
+        <button class="glow-on-hover" type="submit" value="Submit">
+          Submit
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

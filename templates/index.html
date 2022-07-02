@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>EmoViz</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='display.css')}}" />
+    <link rel="icon" href="{{url_for('static',filename='eye.png')}}" type="image/png">
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myCam");
+            var y = document.getElementById("mybutton");
+            if (x.style.display == "none") {
+                x.style.display = "block";
+                y.value = "STOP";
+                y.innerHTML = "STOP";
+            } else {
+                x.style.display = "none";
+                y.value = "START";
+                y.innerHTML = "START";
+            }
+        }
+
+        function checkdata() {
+            var z = document.getElementById("loading");
+            var y = document.getElementById("mybutton");
+            if (document.readyState === "complete") {
+                z.style.display = "none";
+                y.style.visibility="visible";
+            } else {
+                z.style.display = "block";
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-image: url("/static/cam.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body style="background-color:white;" onLoad="checkdata()">
+    <div class="righttopcontainer">
+        <a href="{{url_for('home')}}"><button class="glow-on-hover">HOME</button></a
+      >
+    </div>
+    <div>
+        <h1 class="text-glow" style="text-align: center;">Facial Emotion Detection</h1>
+        <br />
+        <div>
+            <div id="myCam" style="display:none">
+                <img style="margin-top:20px; margin-left:450px;" src="{{ url_for('video')}}" />
+            </div>
+        </div>
+    </div>
+    <br />
+    </div>
+    <div>
+        <button style="left:650px;top: 15px;visibility:hidden" onclick="myFunction()" class="glow-on-hover" id='mybutton' value="START">START</button>
+    </div>
+    <div id="loading" style="display:contents;" >
+        <img style="padding-left: 33%; padding-top: 5%;" src=" {{url_for( 'static',filename='loading-page.gif' ) }}"  alt="Loading"/>
+    </div>
+</body>
+
+</html>
